@@ -76,8 +76,6 @@ export class BotService {
     const userId = ctx.from!.id;
     const user = await this.userModel.findByPk(userId!);
 
-    console.log(user);
-
     if (!user) {
       await ctx.reply("Avval /start tugmasini bosing");
       return;
@@ -202,7 +200,6 @@ export class BotService {
   async roleSaxiy(ctx: Context) {
     const userId = ctx.from!.id;
     const user = await this.userModel.findByPk(userId!);
-    console.log(user);
 
     if (!user) {
       await ctx.reply("Avval /start tugmasini bosing");
@@ -220,7 +217,6 @@ export class BotService {
   async roleSabrli(ctx: Context) {
     const userId = ctx.from!.id;
     const user = await this.userModel.findByPk(userId!);
-    console.log(user);
 
     if (!user) {
       await ctx.reply("Avval /start tugmasini bosing");
@@ -238,7 +234,6 @@ export class BotService {
   async handleMessage(ctx: Context) {
     const userId = ctx.from!.id;
     const user = await this.userModel.findByPk(userId!);
-    console.log(user);
 
     if (!user) {
       await ctx.reply("Avval /start tugmasini bosing");
@@ -346,7 +341,6 @@ export class BotService {
 
     const userId = ctx.from!.id;
     const user = await this.userModel.findByPk(userId!);
-    console.log(user);
 
     if (!user) {
       await ctx.reply("Avval /start tugmasini bosing");
@@ -407,7 +401,6 @@ export class BotService {
   async handleSabrliPagination(ctx: Context) {
     const userId = ctx.from!.id;
     const user = await this.userModel.findByPk(userId!);
-    console.log(user);
 
     if (!user) {
       await ctx.reply("Avval /start tugmasini bosing");
@@ -431,7 +424,6 @@ export class BotService {
 
     const userId = ctx.from!.id;
     const user = await this.userModel.findByPk(userId!);
-    console.log(user);
 
     if (!user) {
       await ctx.reply("Avval /start tugmasini bosing");
@@ -492,7 +484,6 @@ export class BotService {
   async handleSaxiyPagination(ctx: Context) {
     const userId = ctx.from!.id;
     const user = await this.userModel.findByPk(userId!);
-    console.log(user);
 
     if (!user) {
       await ctx.reply("Avval /start tugmasini bosing");
