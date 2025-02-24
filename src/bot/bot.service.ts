@@ -23,28 +23,6 @@ export class BotService {
     ]).resize();
   }
 
-  async checkUser(ctx: Context) {
-    const isUser = async () => {
-      const userId = ctx.from!.id;
-      const user = await this.userModel.findByPk(userId!);
-      if (!user || user.last_state !== "finish") {
-        await ctx.reply("Avval /start tugmasini bosing");
-        return;
-      }
-    };
-
-    const isRegistered = async () => {
-      const userId = ctx.from!.id;
-      const user = await this.userModel.findByPk(userId!);
-      if (!user || user.last_state === "finish") {
-        return;
-      }
-    };
-
-    await isUser();
-    await isRegistered();
-  }
-
   async start(ctx: Context) {
     const userId = ctx.from!.id;
     const user = await this.userModel.findByPk(userId!);
@@ -98,7 +76,10 @@ export class BotService {
     const userId = ctx.from!.id;
     const user = await this.userModel.findByPk(userId!);
 
-    await this.checkUser(ctx);
+    if (!user) {
+      await ctx.reply("Avval /start tugmasini bosing");
+      return;
+    }
 
     if (user?.last_state === "finish") {
       await ctx.reply("Siz allaqachon ro'yxatdan o'tgansiz!");
@@ -220,7 +201,10 @@ export class BotService {
     const userId = ctx.from!.id;
     const user = await this.userModel.findByPk(userId!);
 
-    await this.checkUser(ctx);
+    if (!user) {
+      await ctx.reply("Avval /start tugmasini bosing");
+      return;
+    }
 
     await ctx.answerCbQuery();
     await user?.update({
@@ -234,7 +218,10 @@ export class BotService {
     const userId = ctx.from!.id;
     const user = await this.userModel.findByPk(userId!);
 
-    await this.checkUser(ctx);
+    if (!user) {
+      await ctx.reply("Avval /start tugmasini bosing");
+      return;
+    }
 
     await ctx.answerCbQuery();
     await user?.update({
@@ -248,7 +235,10 @@ export class BotService {
     const userId = ctx.from!.id;
     const user = await this.userModel.findByPk(userId!);
 
-    await this.checkUser(ctx);
+    if (!user) {
+      await ctx.reply("Avval /start tugmasini bosing");
+      return;
+    }
 
     const message: any = ctx.message;
 
@@ -349,6 +339,14 @@ export class BotService {
   async showSabrliUsers(ctx: Context, page = 1) {
     const offset = (page - 1) * this.PAGE_SIZE;
 
+    const userId = ctx.from!.id;
+    const user = await this.userModel.findByPk(userId!);
+
+    if (!user) {
+      await ctx.reply("Avval /start tugmasini bosing");
+      return;
+    }
+
     const totalUsers = await this.userModel.count({
       where: { role: "sabrli", last_state: "finish" },
     });
@@ -401,6 +399,14 @@ export class BotService {
   }
 
   async handleSabrliPagination(ctx: Context) {
+    const userId = ctx.from!.id;
+    const user = await this.userModel.findByPk(userId!);
+
+    if (!user) {
+      await ctx.reply("Avval /start tugmasini bosing");
+      return;
+    }
+
     const callbackQuery: any = ctx.callbackQuery;
     const match = callbackQuery.data.match(/sabrli_page_(\d+)/);
     if (!match) return;
@@ -415,6 +421,14 @@ export class BotService {
 
   async showSaxiyUsers(ctx: Context, page = 1) {
     const offset = (page - 1) * this.PAGE_SIZE;
+
+    const userId = ctx.from!.id;
+    const user = await this.userModel.findByPk(userId!);
+
+    if (!user) {
+      await ctx.reply("Avval /start tugmasini bosing");
+      return;
+    }
 
     const totalUsers = await this.userModel.count({
       where: { role: "saxiy", last_state: "finish" },
@@ -468,6 +482,14 @@ export class BotService {
   }
 
   async handleSaxiyPagination(ctx: Context) {
+    const userId = ctx.from!.id;
+    const user = await this.userModel.findByPk(userId!);
+
+    if (!user) {
+      await ctx.reply("Avval /start tugmasini bosing");
+      return;
+    }
+
     const callbackQuery: any = ctx.callbackQuery;
     const match = callbackQuery.data.match(/saxiy_page_(\d+)/);
     if (!match) return;
