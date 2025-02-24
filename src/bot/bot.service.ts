@@ -76,6 +76,8 @@ export class BotService {
     const userId = ctx.from!.id;
     const user = await this.userModel.findByPk(userId!);
 
+    console.log(user);
+
     if (!user) {
       await ctx.reply("Avval /start tugmasini bosing");
       return;
